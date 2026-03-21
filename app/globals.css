@@ -81,7 +81,7 @@ button {
 body::after {
   content: '';
   position: fixed;
-  inset: 0;
+  inset: -20px;
   pointer-events: none;
   z-index: 9999;
   opacity: 0.035;
