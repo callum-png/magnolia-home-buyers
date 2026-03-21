@@ -12,6 +12,8 @@ const fadeUp = (delay: number) => ({
 
 export default function Hero() {
   const [address, setAddress] = useState('')
+  const [imgLoaded, setImgLoaded] = useState(false)
+  const [imgError, setImgError] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -33,36 +35,67 @@ export default function Hero() {
       }}
       className="clip-diagonal-bottom"
     >
-      {/* Background — photo layer (replace hero.jpg with AI-generated image from Nanobanana) */}
+      {/* Rich CSS background — always visible, photo layers on top when loaded */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           background: `
-            radial-gradient(ellipse 120% 80% at 70% 40%, rgba(20,45,22,0.8) 0%, var(--bg-dark) 70%),
-            linear-gradient(135deg, #0A1A0C 0%, #1A3A1E 40%, #0F2612 70%, #0A1A0C 100%)
+            radial-gradient(ellipse 90% 70% at 72% 38%, #1C4020 0%, #0F2614 35%, #0A1A0C 70%),
+            radial-gradient(ellipse 60% 50% at 15% 80%, #0D2410 0%, #0A1A0C 60%),
+            linear-gradient(160deg, #0A1A0C 0%, #162B18 50%, #0A1A0C 100%)
           `,
         }}
+      />
+
+      {/* Decorative magnolia SVG — large watermark right side */}
+      <div
+        style={{
+          position: 'absolute',
+          right: '-5%',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          width: 'clamp(320px, 45vw, 680px)',
+          height: 'clamp(320px, 45vw, 680px)',
+          opacity: 0.07,
+          pointerEvents: 'none',
+        }}
       >
+        <Image
+          src="/images/magnolia.svg"
+          alt=""
+          fill
+          style={{ objectFit: 'contain' }}
+        />
+      </div>
+
+      {/* Photo background — only shown when image actually loads */}
+      {!imgError && (
         <Image
           src="/images/hero.jpg"
           alt="Beautiful Southern home with magnolia trees"
           fill
           priority
-          style={{ objectFit: 'cover', objectPosition: 'center 30%', mixBlendMode: 'overlay', opacity: 0.4 }}
+          style={{
+            objectFit: 'cover',
+            objectPosition: 'center 30%',
+            opacity: imgLoaded ? 1 : 0,
+            transition: 'opacity 0.8s ease',
+          }}
           sizes="100vw"
-          onError={() => {}}
+          onLoad={() => setImgLoaded(true)}
+          onError={() => setImgError(true)}
         />
-      </div>
+      )}
 
-      {/* Multi-stop gradient overlay */}
+      {/* Gradient overlay — sits on top of photo */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           background: `
-            linear-gradient(to right, rgba(10,26,12,0.98) 0%, rgba(10,26,12,0.75) 45%, rgba(10,26,12,0.35) 100%),
-            linear-gradient(to bottom, rgba(10,26,12,0.3) 0%, rgba(10,26,12,0.0) 40%, rgba(10,26,12,0.88) 100%)
+            linear-gradient(to right, rgba(10,26,12,0.97) 0%, rgba(10,26,12,0.82) 40%, rgba(10,26,12,0.45) 75%, rgba(10,26,12,0.25) 100%),
+            linear-gradient(to bottom, rgba(10,26,12,0.4) 0%, rgba(10,26,12,0.0) 30%, rgba(10,26,12,0.9) 100%)
           `,
         }}
       />
@@ -72,7 +105,7 @@ export default function Hero() {
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(ellipse 85% 70% at 40% 50%, transparent 0%, rgba(10,26,12,0.55) 100%)',
+          background: 'radial-gradient(ellipse 80% 65% at 38% 48%, transparent 0%, rgba(10,26,12,0.5) 100%)',
         }}
       />
 
