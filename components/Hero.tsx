@@ -32,8 +32,10 @@ export default function Hero() {
         alignItems: 'center',
         overflow: 'hidden',
         background: 'var(--bg-dark)',
+        transform: 'translateZ(0)',
+        borderBottom: '1px solid rgba(201,168,76,0.15)',
       }}
-      className="clip-diagonal-bottom"
+      className=""
     >
       {/* Rich CSS background — always visible, photo layers on top when loaded */}
       <div

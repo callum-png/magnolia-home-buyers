@@ -116,7 +116,7 @@ export default function WhyMagnolia() {
         position: 'relative',
         overflow: 'hidden',
       }}
-      className="clip-diagonal-top"
+      className=""
     >
       {/* Decorative magnolia watermark */}
       <div
