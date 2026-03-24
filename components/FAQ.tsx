@@ -49,8 +49,8 @@ function FAQItem({ faq, isOpen, onToggle, isLast }: {
   return (
     <div
       style={{
-        borderTop: '1px solid rgba(26,26,26,0.15)',
-        borderBottom: isLast ? '1px solid rgba(26,26,26,0.15)' : 'none',
+        borderTop: '1px solid rgba(248,244,238,0.07)',
+        borderBottom: isLast ? '1px solid rgba(248,244,238,0.07)' : 'none',
       }}
     >
       <button
@@ -73,10 +73,9 @@ function FAQItem({ faq, isOpen, onToggle, isLast }: {
         <span
           style={{
             fontFamily: 'var(--font-display)',
-            fontStyle: 'italic',
             fontWeight: 400,
             fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
-            color: isOpen ? 'var(--gold)' : hovered ? '#5A3A1A' : 'var(--text-dark)',
+            color: isOpen ? 'var(--blue)' : hovered ? 'rgba(43,91,168,0.08)' : 'var(--text-light)',
             transition: 'color 0.2s',
             lineHeight: 1.2,
           }}
@@ -85,7 +84,7 @@ function FAQItem({ faq, isOpen, onToggle, isLast }: {
         </span>
         <span
           style={{
-            color: 'var(--gold)',
+            color: 'var(--blue)',
             fontSize: '1.2rem',
             transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
             transition: 'transform 0.3s ease',
@@ -112,7 +111,7 @@ function FAQItem({ faq, isOpen, onToggle, isLast }: {
                 fontWeight: 300,
                 fontSize: '0.95rem',
                 lineHeight: 1.8,
-                color: 'var(--text-dark-muted)',
+                color: 'var(--text-muted)',
                 paddingBottom: 'clamp(16px, 2.5vw, 24px)',
                 maxWidth: 700,
               }}
@@ -133,21 +132,20 @@ export default function FAQ() {
     <section
       id="faq"
       style={{
-        background: 'var(--bg-cream)',
+        background: 'var(--bg-dark)',
         padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',
       }}
     >
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         {/* Header */}
         <div style={{ marginBottom: 'clamp(40px, 6vw, 64px)' }}>
-          <span className="eyebrow" style={{ color: 'var(--gold)' }}>Questions</span>
+          <span className="eyebrow" style={{ color: 'var(--blue)' }}>Questions</span>
           <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
               fontWeight: 400,
               fontSize: 'clamp(2.5rem, 5vw, 5rem)',
-              color: 'var(--text-dark)',
+              color: 'var(--text-light)',
               lineHeight: 0.95,
               letterSpacing: '-0.01em',
             }}
@@ -174,7 +172,7 @@ export default function FAQ() {
               fontFamily: 'var(--font-body)',
               fontWeight: 300,
               fontSize: '1rem',
-              color: 'var(--text-dark-muted)',
+              color: 'var(--text-muted)',
               marginBottom: 20,
             }}
           >
@@ -189,14 +187,14 @@ export default function FAQ() {
               fontSize: '0.78rem',
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: 'var(--bg-dark)',
-              background: 'var(--gold)',
+              color: 'var(--text-light)',
+              background: 'var(--blue)',
               padding: '13px 32px',
               borderRadius: 2,
               transition: 'background 0.2s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--gold-light)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--gold)')}
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--blue-light)')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--blue)')}
           >
             Ask Us Anything
           </a>
