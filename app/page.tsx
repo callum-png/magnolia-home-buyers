@@ -3,7 +3,7 @@ import HowItWorks from '@/components/HowItWorks'
 import WhyMagnolia from '@/components/WhyMagnolia'
 import Testimonials from '@/components/Testimonials'
 import FAQ from '@/components/FAQ'
-// import CTASection from '@/components/CTASection'
+import CTASection from '@/components/CTASection'
 
 export default function HomePage() {
   return (
@@ -13,7 +13,7 @@ export default function HomePage() {
       <WhyMagnolia />
       <Testimonials />
       <FAQ />
-      {/* <CTASection /> */}
+      <CTASection />
     </main>
   )
 }
