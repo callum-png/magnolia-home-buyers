@@ -45,7 +45,7 @@ function Step({ step, index }: { step: typeof steps[0]; index: number }) {
         gridTemplateColumns: '120px 1fr',
         gap: 'clamp(24px, 4vw, 56px)',
         padding: 'clamp(32px, 5vw, 56px) 0',
-        borderTop: '1px solid rgba(201,168,76,0.2)',
+        borderTop: '1px solid rgba(17,17,17,0.1)',
         alignItems: 'start',
       }}
       className="step-row"
@@ -55,10 +55,9 @@ function Step({ step, index }: { step: typeof steps[0]; index: number }) {
         <span
           style={{
             fontFamily: 'var(--font-display)',
-            fontStyle: 'italic',
             fontWeight: 600,
             fontSize: 'clamp(3.5rem, 6vw, 6rem)',
-            color: 'var(--gold)',
+            color: 'var(--blue)',
             lineHeight: 1,
             display: 'block',
             opacity: 0.55,
@@ -73,10 +72,9 @@ function Step({ step, index }: { step: typeof steps[0]; index: number }) {
         <h3
           style={{
             fontFamily: 'var(--font-display)',
-            fontStyle: 'italic',
             fontWeight: 600,
             fontSize: 'clamp(1.8rem, 3vw, 3rem)',
-            color: 'var(--text-warm)',
+            color: 'var(--text-dark)',
             lineHeight: 1.1,
             marginBottom: 'clamp(12px, 2vw, 20px)',
             letterSpacing: '-0.01em',
@@ -90,7 +88,7 @@ function Step({ step, index }: { step: typeof steps[0]; index: number }) {
             fontWeight: 300,
             fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
             lineHeight: 1.8,
-            color: 'var(--text-muted)',
+            color: 'var(--text-dark-muted)',
             maxWidth: 600,
           }}
         >
@@ -106,7 +104,7 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       style={{
-        background: 'var(--bg-dark)',
+        background: 'var(--bg-cream)',
         padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',
       }}
     >
@@ -128,7 +126,6 @@ export default function HowItWorks() {
             <h2
               style={{
                 fontFamily: 'var(--font-display)',
-                fontStyle: 'italic',
                 fontWeight: 400,
                 fontSize: 'clamp(2.8rem, 5.5vw, 5.5rem)',
                 lineHeight: 0.9,
@@ -137,7 +134,7 @@ export default function HowItWorks() {
             >
               Three Steps to
               <br />
-              <span style={{ color: 'var(--gold)' }}>Your Cash Offer</span>
+              <span style={{ color: 'var(--blue)' }}>Your Cash Offer</span>
             </h2>
           </div>
           <a
@@ -148,8 +145,8 @@ export default function HowItWorks() {
               fontSize: '0.75rem',
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: 'var(--bg-dark)',
-              background: 'var(--gold)',
+              color: '#ffffff',
+              background: 'var(--blue)',
               padding: '13px 28px',
               borderRadius: 2,
               whiteSpace: 'nowrap',
@@ -158,8 +155,8 @@ export default function HowItWorks() {
               alignSelf: 'flex-start',
               marginTop: 8,
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--gold-light)')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--gold)')}
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--blue-light)')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--blue)')}
           >
             Start Today
           </a>
@@ -171,7 +168,7 @@ export default function HowItWorks() {
             <Step key={step.number} step={step} index={i} />
           ))}
           {/* Bottom border */}
-          <div style={{ borderTop: '1px solid rgba(201,168,76,0.2)' }} />
+          <div style={{ borderTop: '1px solid rgba(17,17,17,0.08)' }} />
         </div>
       </div>
 
