@@ -64,9 +64,10 @@ function FAQItem({ faq, isOpen, onToggle, isLast }: {
           justifyContent: 'space-between',
           gap: 20,
           padding: 'clamp(16px, 2.5vw, 24px) 0',
-          background: 'transparent',
+          background: hovered ? 'rgba(43,91,168,0.08)' : 'transparent',
           cursor: 'pointer',
           textAlign: 'left',
+          transition: 'background 0.2s',
         }}
         aria-expanded={isOpen}
       >
@@ -75,7 +76,7 @@ function FAQItem({ faq, isOpen, onToggle, isLast }: {
             fontFamily: 'var(--font-display)',
             fontWeight: 400,
             fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
-            color: isOpen ? 'var(--blue)' : hovered ? 'rgba(43,91,168,0.08)' : 'var(--text-light)',
+            color: isOpen ? 'var(--blue)' : 'var(--text-light)',
             transition: 'color 0.2s',
             lineHeight: 1.2,
           }}
