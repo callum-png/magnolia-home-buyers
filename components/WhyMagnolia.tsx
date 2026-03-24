@@ -9,7 +9,7 @@ const reasons = [
     number: '01',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M14 3L3 11V25H11V17H17V25H25V11L14 3Z" stroke="#C9A84C" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M14 3L3 11V25H11V17H17V25H25V11L14 3Z" stroke="#2B5BA8" strokeWidth="1.5" strokeLinejoin="round"/>
       </svg>
     ),
     title: 'No Repairs Needed',
@@ -19,8 +19,8 @@ const reasons = [
     number: '02',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="10" stroke="#C9A84C" strokeWidth="1.5"/>
-        <path d="M10 14L12.5 17L18 11" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="14" cy="14" r="10" stroke="#2B5BA8" strokeWidth="1.5"/>
+        <path d="M10 14L12.5 17L18 11" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
     title: 'Zero Agent Fees',
@@ -30,11 +30,11 @@ const reasons = [
     number: '03',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="3" y="6" width="22" height="19" rx="2" stroke="#C9A84C" strokeWidth="1.5"/>
-        <line x1="3" y1="11" x2="25" y2="11" stroke="#C9A84C" strokeWidth="1.5"/>
-        <line x1="9" y1="3" x2="9" y2="9" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round"/>
-        <line x1="19" y1="3" x2="19" y2="9" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round"/>
-        <rect x="8" y="16" width="5" height="4" rx="1" fill="#C9A84C" opacity="0.5"/>
+        <rect x="3" y="6" width="22" height="19" rx="2" stroke="#2B5BA8" strokeWidth="1.5"/>
+        <line x1="3" y1="11" x2="25" y2="11" stroke="#2B5BA8" strokeWidth="1.5"/>
+        <line x1="9" y1="3" x2="9" y2="9" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round"/>
+        <line x1="19" y1="3" x2="19" y2="9" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round"/>
+        <rect x="8" y="16" width="5" height="4" rx="1" fill="#2B5BA8" opacity="0.5"/>
       </svg>
     ),
     title: 'Close in 7–14 Days',
@@ -44,8 +44,8 @@ const reasons = [
     number: '04',
     icon: (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M14 3L5 8V18C5 22 9 25 14 27C19 25 23 22 23 18V8L14 3Z" stroke="#C9A84C" strokeWidth="1.5" strokeLinejoin="round"/>
-        <path d="M10 14L12.5 17L18 12" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M14 3L5 8V18C5 22 9 25 14 27C19 25 23 22 23 18V8L14 3Z" stroke="#2B5BA8" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M10 14L12.5 17L18 12" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
     title: 'Guaranteed Cash',
@@ -77,10 +77,10 @@ function ReasonRow({ reason, index }: { reason: typeof reasons[0]; index: number
       onMouseLeave={() => setHovered(false)}
       style={{
         padding: 'clamp(28px, 4vw, 44px) clamp(24px, 3vw, 36px)',
-        borderTop: '1px solid rgba(26,26,26,0.15)',
-        borderLeft: `3px solid ${hovered ? 'var(--gold)' : 'transparent'}`,
+        borderTop: '1px solid rgba(248,244,238,0.07)',
+        borderLeft: `3px solid ${hovered ? 'var(--blue)' : 'transparent'}`,
         transition: 'border-color 0.25s, background 0.25s',
-        background: hovered ? 'rgba(201,168,76,0.03)' : 'transparent',
+        background: hovered ? 'rgba(43,91,168,0.06)' : 'transparent',
         cursor: 'default',
       }}
     >
@@ -96,10 +96,9 @@ function ReasonRow({ reason, index }: { reason: typeof reasons[0]; index: number
         <span
           style={{
             fontFamily: 'var(--font-display)',
-            fontStyle: 'italic',
             fontWeight: 600,
             fontSize: '0.85rem',
-            color: 'var(--gold)',
+            color: 'var(--blue)',
             opacity: 0.7,
           }}
         >
@@ -113,10 +112,9 @@ function ReasonRow({ reason, index }: { reason: typeof reasons[0]; index: number
       <h3
         style={{
           fontFamily: 'var(--font-display)',
-          fontStyle: 'italic',
           fontWeight: 600,
           fontSize: 'clamp(1.35rem, 2.2vw, 1.9rem)',
-          color: hovered ? 'var(--gold)' : 'var(--text-dark)',
+          color: hovered ? 'var(--blue-light)' : 'var(--text-light)',
           marginBottom: 12,
           lineHeight: 1.15,
           transition: 'color 0.25s',
@@ -130,7 +128,7 @@ function ReasonRow({ reason, index }: { reason: typeof reasons[0]; index: number
           fontWeight: 300,
           fontSize: '0.95rem',
           lineHeight: 1.8,
-          color: 'var(--text-dark-muted)',
+          color: 'var(--text-muted)',
         }}
       >
         {reason.body}
@@ -144,7 +142,7 @@ export default function WhyMagnolia() {
     <section
       id="why-magnolia"
       style={{
-        background: 'var(--bg-cream)',
+        background: 'var(--bg-dark)',
         padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',
         position: 'relative',
         overflow: 'hidden',
@@ -174,14 +172,13 @@ export default function WhyMagnolia() {
       <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
         {/* Header */}
         <div style={{ marginBottom: 'clamp(8px, 2vw, 16px)' }}>
-          <span className="eyebrow" style={{ color: 'var(--gold)' }}>Our Difference</span>
+          <span className="eyebrow" style={{ color: 'var(--blue)' }}>Our Difference</span>
           <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
               fontWeight: 400,
               fontSize: 'clamp(2.8rem, 5.5vw, 5.5rem)',
-              color: 'var(--text-dark)',
+              color: 'var(--text-light)',
               lineHeight: 0.9,
               letterSpacing: '-0.01em',
               maxWidth: 640,
@@ -189,7 +186,7 @@ export default function WhyMagnolia() {
           >
             Why Sellers
             <br />
-            Choose <span style={{ color: 'var(--gold)' }}>Magnolia</span>
+            Choose <span style={{ color: 'var(--blue)' }}>Magnolia</span>
           </h2>
         </div>
 
@@ -207,7 +204,7 @@ export default function WhyMagnolia() {
             <div
               key={reason.number}
               style={{
-                borderRight: i % 2 === 0 ? '1px solid rgba(26,26,26,0.1)' : 'none',
+                borderRight: i % 2 === 0 ? '1px solid rgba(248,244,238,0.07)' : 'none',
               }}
               className={i >= 2 ? 'reason-bottom' : ''}
             >
@@ -217,11 +214,11 @@ export default function WhyMagnolia() {
         </div>
 
         {/* Bottom border */}
-        <div style={{ borderTop: '1px solid rgba(26,26,26,0.15)', marginTop: 0 }} />
+        <div style={{ borderTop: '1px solid rgba(248,244,238,0.07)', marginTop: 0 }} />
       </div>
 
       <style>{`
-        .reason-bottom { border-top: 1px solid rgba(26,26,26,0.15); }
+        .reason-bottom { border-top: 1px solid rgba(248,244,238,0.07); }
         @media (max-width: 640px) {
           .why-grid { grid-template-columns: 1fr !important; }
           .why-grid > div { border-right: none !important; }
