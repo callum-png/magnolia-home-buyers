@@ -143,7 +143,7 @@ export default function HowItWorks() {
               fontFamily: 'var(--font-body)',
               fontWeight: 600,
               fontSize: '0.75rem',
-              letterSpacing: '0.14em',
+              letterSpacing: '0.10em',
               textTransform: 'uppercase',
               color: '#ffffff',
               background: 'var(--blue)',
