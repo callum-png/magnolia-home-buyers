@@ -72,13 +72,13 @@ export default function Testimonials() {
     <section
       id="testimonials"
       style={{
-        background: 'var(--bg-alt)',
+        background: 'var(--bg-cream)',
         padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Background gold quote mark */}
+      {/* Background blue quote mark */}
       <div
         style={{
           position: 'absolute',
@@ -86,7 +86,7 @@ export default function Testimonials() {
           left: 'clamp(24px, 6vw, 80px)',
           fontFamily: 'var(--font-display)',
           fontSize: 'clamp(12rem, 22vw, 24rem)',
-          color: 'var(--gold)',
+          color: 'var(--blue)',
           opacity: 0.04,
           lineHeight: 1,
           userSelect: 'none',
@@ -110,7 +110,6 @@ export default function Testimonials() {
           <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontStyle: 'italic',
               fontWeight: 400,
               fontSize: 'clamp(2.5rem, 5vw, 5rem)',
               lineHeight: 0.95,
@@ -136,11 +135,10 @@ export default function Testimonials() {
               <blockquote
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontStyle: 'italic',
                   fontWeight: 400,
                   fontSize: 'clamp(1.35rem, 2.8vw, 2.2rem)',
                   lineHeight: 1.55,
-                  color: 'var(--text-warm)',
+                  color: 'var(--text-dark)',
                   letterSpacing: '-0.005em',
                   margin: 0,
                 }}
@@ -183,7 +181,7 @@ export default function Testimonials() {
                   style={{
                     width: 32,
                     height: 1,
-                    background: 'var(--gold)',
+                    background: 'var(--blue)',
                     opacity: 0.6,
                   }}
                 />
@@ -192,7 +190,7 @@ export default function Testimonials() {
                     fontFamily: 'var(--font-body)',
                     fontWeight: 500,
                     fontSize: '1rem',
-                    color: 'var(--gold)',
+                    color: 'var(--blue)',
                   }}
                 >
                   {t.name}, {t.location}
@@ -205,7 +203,7 @@ export default function Testimonials() {
                   fontSize: '0.68rem',
                   letterSpacing: '0.18em',
                   textTransform: 'uppercase',
-                  color: 'var(--text-muted)',
+                  color: 'var(--text-dark-muted)',
                   paddingLeft: 44,
                 }}
               >
@@ -227,7 +225,7 @@ export default function Testimonials() {
                     width: i === current ? 24 : 8,
                     height: 8,
                     borderRadius: 4,
-                    background: i === current ? 'var(--gold)' : 'rgba(201,168,76,0.28)',
+                    background: i === current ? 'var(--blue)' : 'rgba(43,91,168,0.28)',
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'width 0.35s ease, background 0.35s ease',
@@ -249,9 +247,9 @@ export default function Testimonials() {
                     width: 40,
                     height: 40,
                     borderRadius: 2,
-                    border: '1px solid rgba(201,168,76,0.3)',
+                    border: '1px solid rgba(43,91,168,0.3)',
                     background: 'transparent',
-                    color: 'var(--gold)',
+                    color: 'var(--blue)',
                     fontFamily: 'var(--font-body)',
                     fontSize: '1rem',
                     cursor: 'pointer',
@@ -261,12 +259,12 @@ export default function Testimonials() {
                     justifyContent: 'center',
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(201,168,76,0.1)'
-                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.6)'
+                    e.currentTarget.style.background = 'rgba(43,91,168,0.1)'
+                    e.currentTarget.style.borderColor = 'rgba(43,91,168,0.6)'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = 'transparent'
-                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.3)'
+                    e.currentTarget.style.borderColor = 'rgba(43,91,168,0.3)'
                   }}
                 >
                   {label}
