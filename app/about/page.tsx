@@ -12,8 +12,8 @@ export default function AboutPage() {
     {
       icon: (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="12" stroke="#C9A84C" strokeWidth="1.5"/>
-          <path d="M11 16L14.5 20L21 13" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <circle cx="16" cy="16" r="12" stroke="#2B5BA8" strokeWidth="1.5"/>
+          <path d="M11 16L14.5 20L21 13" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
       title: 'Transparency',
@@ -22,8 +22,8 @@ export default function AboutPage() {
     {
       icon: (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="12" stroke="#C9A84C" strokeWidth="1.5"/>
-          <path d="M16 10V16L20 18" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <circle cx="16" cy="16" r="12" stroke="#2B5BA8" strokeWidth="1.5"/>
+          <path d="M16 10V16L20 18" stroke="#2B5BA8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       ),
       title: 'Speed',
@@ -32,7 +32,7 @@ export default function AboutPage() {
     {
       icon: (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M16 4L4 10V22C4 27 10 30 16 32C22 30 28 27 28 22V10L16 4Z" stroke="#C9A84C" strokeWidth="1.5" strokeLinejoin="round"/>
+          <path d="M16 4L4 10V22C4 27 10 30 16 32C22 30 28 27 28 22V10L16 4Z" stroke="#2B5BA8" strokeWidth="1.5" strokeLinejoin="round"/>
         </svg>
       ),
       title: 'Respect',
@@ -87,14 +87,14 @@ export default function AboutPage() {
           >
             We Buy Homes,
             <br />
-            <span style={{ color: 'var(--gold)' }}>We Help People</span>
+            <span style={{ color: 'var(--blue)' }}>We Help People</span>
           </h1>
 
           <div
             style={{
               width: 48,
               height: 1,
-              background: 'var(--gold)',
+              background: 'var(--blue)',
               margin: '32px auto',
               opacity: 0.6,
             }}
@@ -156,7 +156,7 @@ export default function AboutPage() {
                 backdropFilter: 'blur(8px)',
                 padding: '16px 20px',
                 borderRadius: 2,
-                borderLeft: '2px solid var(--gold)',
+                borderLeft: '2px solid var(--blue)',
               }}
             >
               <p
@@ -176,7 +176,7 @@ export default function AboutPage() {
                   fontSize: '0.72rem',
                   letterSpacing: '0.14em',
                   textTransform: 'uppercase',
-                  color: 'var(--gold)',
+                  color: 'var(--blue)',
                 }}
               >
                 Founder, Magnolia Home Buyers LLC
@@ -233,7 +233,7 @@ export default function AboutPage() {
         }}
       >
         <div style={{ maxWidth: 760, margin: '0 auto' }}>
-          <span className="eyebrow" style={{ color: 'var(--gold)' }}>Our Mission</span>
+          <span className="eyebrow" style={{ color: 'var(--blue)' }}>Our Mission</span>
           <blockquote
             style={{
               fontFamily: 'var(--font-display)',
@@ -255,7 +255,7 @@ export default function AboutPage() {
               fontSize: '0.85rem',
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: 'var(--gold)',
+              color: 'var(--blue)',
             }}
           >
             — David Machado, Founder
@@ -336,7 +336,7 @@ export default function AboutPage() {
       {/* CTA strip */}
       <section
         style={{
-          background: 'var(--bg-alt)',
+          background: 'var(--bg-dark)',
           padding: 'clamp(64px, 8vw, 96px) clamp(24px, 6vw, 80px)',
           textAlign: 'center',
           borderTop: '1px solid rgba(201,168,76,0.1)',
@@ -368,7 +368,7 @@ export default function AboutPage() {
           letter-spacing: 0.14em;
           text-transform: uppercase;
           color: var(--bg-dark);
-          background: var(--gold);
+          background: var(--blue);
           padding: 16px 44px;
           border-radius: 2px;
           transition: background 0.2s;

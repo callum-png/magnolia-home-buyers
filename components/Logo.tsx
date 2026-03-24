@@ -25,8 +25,7 @@ export default function Logo({ dark = false, size = 32 }: LogoProps) {
             fontStyle: 'italic',
             fontWeight: 600,
             fontSize: size * 0.72,
-            color: dark ? 'var(--text-dark)' : 'var(--gold)',
-            letterSpacing: '0.01em',
+            color: dark ? 'var(--text-dark)' : 'var(--text-light)',
           }}
         >
           Magnolia
