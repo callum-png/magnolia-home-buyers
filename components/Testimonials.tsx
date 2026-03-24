@@ -1,26 +1,23 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { useRef, useEffect, useState, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const testimonials = [
   {
-    quote:
-      "We inherited my grandmother's house and had no idea what to do. Magnolia gave us a fair offer within 24 hours and we closed in 10 days. They handled everything — we didn't have to lift a finger.",
+    quote: "We inherited my grandmother's house and had no idea what to do. Magnolia gave us a fair offer within 24 hours and we closed in 10 days. They handled everything — we didn't have to lift a finger.",
     name: 'Sarah M.',
     location: 'Memphis, TN',
     situation: 'Inherited Property · Closed in 10 Days',
   },
   {
-    quote:
-      "Our home had significant water damage from a burst pipe. No traditional buyer would touch it. Magnolia made us a cash offer as-is, no repairs required. We walked away with more than we expected.",
+    quote: "Our home had significant water damage from a burst pipe. No traditional buyer would touch it. Magnolia made us a cash offer as-is, no repairs required. We walked away with more than we expected.",
     name: 'James & Cora T.',
     location: 'Houston, TX',
     situation: 'Damaged Home · Closed in 8 Days',
   },
   {
-    quote:
-      "Going through a divorce is hard enough. The last thing I wanted was to deal with showings, agents, and negotiations. Magnolia made the whole process painless. One offer, one close, done.",
+    quote: "Going through a divorce is hard enough. The last thing I wanted was to deal with showings, agents, and negotiations. Magnolia made the whole process painless. One offer, one close, done.",
     name: 'Patricia W.',
     location: 'Atlanta, GA',
     situation: 'Divorce Sale · Closed in 12 Days',
@@ -28,8 +25,11 @@ const testimonials = [
 ]
 
 export default function Testimonials() {
+  const [current, setCurrent] = useState(0)
+  const [direction, setDirection] = useState(1)
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,18 +40,73 @@ export default function Testimonials() {
     return () => observer.disconnect()
   }, [])
 
+  const go = useCallback((index: number) => {
+    setDirection(index > current ? 1 : -1)
+    setCurrent(index)
+  }, [current])
+
+  const next = useCallback(() => {
+    setDirection(1)
+    setCurrent((c) => (c + 1) % testimonials.length)
+  }, [])
+
+  const prev = useCallback(() => {
+    setDirection(-1)
+    setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length)
+  }, [])
+
+  // Auto-advance
+  useEffect(() => {
+    intervalRef.current = setInterval(next, 6000)
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
+  }, [next])
+
+  const resetInterval = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    intervalRef.current = setInterval(next, 6000)
+  }
+
+  const t = testimonials[current]
+
   return (
     <section
       id="testimonials"
       style={{
         background: 'var(--bg-alt)',
         padding: 'var(--section-gap) clamp(24px, 6vw, 80px)',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <div ref={ref} style={{ maxWidth: 1100, margin: '0 auto' }}>
-        {/* Header */}
-        <div style={{ marginBottom: 'clamp(40px, 6vw, 72px)', textAlign: 'right' }}>
-          <span className="eyebrow" style={{ textAlign: 'right' }}>Real Stories</span>
+      {/* Background gold quote mark */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 'clamp(40px, 6vw, 80px)',
+          left: 'clamp(24px, 6vw, 80px)',
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(12rem, 22vw, 24rem)',
+          color: 'var(--gold)',
+          opacity: 0.04,
+          lineHeight: 1,
+          userSelect: 'none',
+          pointerEvents: 'none',
+          letterSpacing: '-0.05em',
+        }}
+        aria-hidden
+      >
+        &#8220;
+      </div>
+
+      <div ref={ref} style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
+        {/* Section label */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={visible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          style={{ marginBottom: 'clamp(48px, 7vw, 80px)' }}
+        >
+          <span className="eyebrow">Real Stories</span>
           <h2
             style={{
               fontFamily: 'var(--font-display)',
@@ -64,104 +119,163 @@ export default function Testimonials() {
           >
             What Our Sellers Say
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Cards */}
-        <div
-          className="testimonials-grid"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 20,
-          }}
-        >
-          {testimonials.map((t, i) => (
+        {/* Quote */}
+        <div style={{ position: 'relative', minHeight: 'clamp(200px, 25vw, 280px)' }}>
+          <AnimatePresence mode="wait" custom={direction}>
             <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={visible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.15, ease: "easeOut" as const }}
-              style={{
-                background: 'var(--bg-card)',
-                borderRadius: 2,
-                padding: 'clamp(32px, 4vw, 48px)',
-                borderTop: '2px solid var(--gold-border)',
-                position: 'relative',
-                overflow: 'hidden',
-              }}
+              key={current}
+              custom={direction}
+              initial={{ opacity: 0, x: direction * 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: direction * -40 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              style={{ position: 'absolute', inset: 0 }}
             >
-              {/* Large quote mark */}
-              <span
-                style={{
-                  position: 'absolute',
-                  top: 16,
-                  left: 24,
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '8rem',
-                  color: 'var(--gold)',
-                  opacity: 0.18,
-                  lineHeight: 1,
-                  userSelect: 'none',
-                  pointerEvents: 'none',
-                }}
-              >
-                ❝
-              </span>
-
-              {/* Quote */}
-              <p
+              <blockquote
                 style={{
                   fontFamily: 'var(--font-display)',
                   fontStyle: 'italic',
                   fontWeight: 400,
-                  fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
-                  lineHeight: 1.8,
+                  fontSize: 'clamp(1.35rem, 2.8vw, 2.2rem)',
+                  lineHeight: 1.55,
                   color: 'var(--text-warm)',
-                  position: 'relative',
-                  zIndex: 1,
-                  marginBottom: 28,
-                  marginTop: 20,
+                  letterSpacing: '-0.005em',
+                  margin: 0,
                 }}
               >
-                {`"${t.quote}"`}
-              </p>
-
-              {/* Attribution */}
-              <div style={{ borderTop: '1px solid rgba(201,168,76,0.15)', paddingTop: 20 }}>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontWeight: 400,
-                    fontSize: '0.95rem',
-                    color: 'var(--gold)',
-                    marginBottom: 4,
-                  }}
-                >
-                  — {t.name}, {t.location}
-                </p>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontWeight: 300,
-                    fontSize: '0.7rem',
-                    letterSpacing: '0.16em',
-                    textTransform: 'uppercase',
-                    color: 'var(--text-muted)',
-                  }}
-                >
-                  {t.situation}
-                </p>
-              </div>
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
             </motion.div>
-          ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Attribution + Controls row */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: 'clamp(28px, 4vw, 44px)',
+            gap: 20,
+            flexWrap: 'wrap',
+          }}
+        >
+          {/* Attribution */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current + '-attr'}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35 }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 12,
+                  marginBottom: 4,
+                }}
+              >
+                <div
+                  style={{
+                    width: 32,
+                    height: 1,
+                    background: 'var(--gold)',
+                    opacity: 0.6,
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontWeight: 500,
+                    fontSize: '1rem',
+                    color: 'var(--gold)',
+                  }}
+                >
+                  {t.name}, {t.location}
+                </span>
+              </div>
+              <p
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontWeight: 300,
+                  fontSize: '0.68rem',
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: 'var(--text-muted)',
+                  paddingLeft: 44,
+                }}
+              >
+                {t.situation}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            {/* Dots */}
+            <div style={{ display: 'flex', gap: 8 }}>
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => { go(i); resetInterval() }}
+                  aria-label={`Testimonial ${i + 1}`}
+                  style={{
+                    width: i === current ? 24 : 8,
+                    height: 8,
+                    borderRadius: 4,
+                    background: i === current ? 'var(--gold)' : 'rgba(201,168,76,0.28)',
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'width 0.35s ease, background 0.35s ease',
+                    padding: 0,
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Prev / Next */}
+            <div style={{ display: 'flex', gap: 8 }}>
+              {([{ fn: () => { prev(); resetInterval() }, label: '←' },
+                { fn: () => { next(); resetInterval() }, label: '→' }] as const).map(({ fn, label }) => (
+                <button
+                  key={label}
+                  onClick={fn}
+                  aria-label={label === '←' ? 'Previous testimonial' : 'Next testimonial'}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 2,
+                    border: '1px solid rgba(201,168,76,0.3)',
+                    background: 'transparent',
+                    color: 'var(--gold)',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    transition: 'background 0.2s, border-color 0.2s',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(201,168,76,0.1)'
+                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.6)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'transparent'
+                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.3)'
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          .testimonials-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   )
 }

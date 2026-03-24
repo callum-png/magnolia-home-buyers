@@ -1,49 +1,51 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import Image from 'next/image'
 
 const reasons = [
   {
+    number: '01',
     icon: (
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-        <path d="M18 4L4 14V32H14V22H22V32H32V14L18 4Z" stroke="#C9A84C" strokeWidth="1.5" strokeLinejoin="round"/>
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 3L3 11V25H11V17H17V25H25V11L14 3Z" stroke="#C9A84C" strokeWidth="1.5" strokeLinejoin="round"/>
       </svg>
     ),
     title: 'No Repairs Needed',
     body: 'Sell completely as-is. No cleaning, no staging, no fixing anything. We buy homes in every condition — even fire-damaged, flood-affected, or condemned.',
   },
   {
+    number: '02',
     icon: (
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-        <circle cx="18" cy="18" r="13" stroke="#C9A84C" strokeWidth="1.5"/>
-        <path d="M18 10V12M18 24V26M13 15H11M25 15H23" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round"/>
-        <circle cx="18" cy="17" r="3" stroke="#C9A84C" strokeWidth="1.5"/>
-        <line x1="20" y1="20" x2="23" y2="23" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round"/>
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="10" stroke="#C9A84C" strokeWidth="1.5"/>
+        <path d="M10 14L12.5 17L18 11" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
     title: 'Zero Agent Fees',
     body: 'No commissions, no closing costs taken from your payout, no hidden fees. The offer we make is the amount you walk away with.',
   },
   {
+    number: '03',
     icon: (
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-        <rect x="4" y="8" width="28" height="24" rx="2" stroke="#C9A84C" strokeWidth="1.5"/>
-        <line x1="4" y1="14" x2="32" y2="14" stroke="#C9A84C" strokeWidth="1.5"/>
-        <line x1="12" y1="4" x2="12" y2="12" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round"/>
-        <line x1="24" y1="4" x2="24" y2="12" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round"/>
-        <rect x="10" y="20" width="6" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="3" y="6" width="22" height="19" rx="2" stroke="#C9A84C" strokeWidth="1.5"/>
+        <line x1="3" y1="11" x2="25" y2="11" stroke="#C9A84C" strokeWidth="1.5"/>
+        <line x1="9" y1="3" x2="9" y2="9" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round"/>
+        <line x1="19" y1="3" x2="19" y2="9" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round"/>
+        <rect x="8" y="16" width="5" height="4" rx="1" fill="#C9A84C" opacity="0.5"/>
       </svg>
     ),
     title: 'Close in 7–14 Days',
     body: 'You choose your closing date. We have closed in as few as 7 days. If you need more time to make arrangements, we work around your schedule.',
   },
   {
+    number: '04',
     icon: (
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-        <path d="M18 4L6 10V22C6 28 12 32 18 34C24 32 30 28 30 22V10L18 4Z" stroke="#C9A84C" strokeWidth="1.5" strokeLinejoin="round"/>
-        <path d="M13 18L16.5 22L23 15" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 3L5 8V18C5 22 9 25 14 27C19 25 23 22 23 18V8L14 3Z" stroke="#C9A84C" strokeWidth="1.5" strokeLinejoin="round"/>
+        <path d="M10 14L12.5 17L18 12" stroke="#C9A84C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
     title: 'Guaranteed Cash',
@@ -51,9 +53,10 @@ const reasons = [
   },
 ]
 
-function Card({ reason, index }: { reason: typeof reasons[0]; index: number }) {
+function ReasonRow({ reason, index }: { reason: typeof reasons[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
+  const [hovered, setHovered] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -67,26 +70,56 @@ function Card({ reason, index }: { reason: typeof reasons[0]; index: number }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={visible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: (index % 2) * 0.15, ease: "easeOut" as const }}
+      transition={{ duration: 0.6, delay: (index % 2) * 0.12, ease: 'easeOut' }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        background: 'var(--bg-parchment)',
-        borderRadius: 2,
-        padding: 'clamp(28px, 4vw, 44px)',
-        borderTop: '3px solid var(--gold)',
-        boxShadow: '0 2px 32px rgba(0,0,0,0.06)',
+        padding: 'clamp(28px, 4vw, 44px) clamp(24px, 3vw, 36px)',
+        borderTop: '1px solid rgba(26,26,26,0.15)',
+        borderLeft: `3px solid ${hovered ? 'var(--gold)' : 'transparent'}`,
+        transition: 'border-color 0.25s, background 0.25s',
+        background: hovered ? 'rgba(201,168,76,0.03)' : 'transparent',
+        cursor: 'default',
       }}
     >
-      <div style={{ marginBottom: 20 }}>{reason.icon}</div>
+      {/* Number + Icon row */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 12,
+          marginBottom: 16,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontStyle: 'italic',
+            fontWeight: 600,
+            fontSize: '0.85rem',
+            color: 'var(--gold)',
+            opacity: 0.7,
+          }}
+        >
+          {reason.number}
+        </span>
+        <div style={{ opacity: hovered ? 1 : 0.7, transition: 'opacity 0.25s' }}>
+          {reason.icon}
+        </div>
+      </div>
+
       <h3
         style={{
           fontFamily: 'var(--font-display)',
+          fontStyle: 'italic',
           fontWeight: 600,
-          fontSize: 'clamp(1.25rem, 2vw, 1.6rem)',
-          color: 'var(--text-dark)',
+          fontSize: 'clamp(1.35rem, 2.2vw, 1.9rem)',
+          color: hovered ? 'var(--gold)' : 'var(--text-dark)',
           marginBottom: 12,
-          lineHeight: 1.2,
+          lineHeight: 1.15,
+          transition: 'color 0.25s',
         }}
       >
         {reason.title}
@@ -96,7 +129,7 @@ function Card({ reason, index }: { reason: typeof reasons[0]; index: number }) {
           fontFamily: 'var(--font-body)',
           fontWeight: 300,
           fontSize: '0.95rem',
-          lineHeight: 1.75,
+          lineHeight: 1.8,
           color: 'var(--text-dark-muted)',
         }}
       >
@@ -116,17 +149,16 @@ export default function WhyMagnolia() {
         position: 'relative',
         overflow: 'hidden',
       }}
-      className=""
     >
       {/* Decorative magnolia watermark */}
       <div
         style={{
           position: 'absolute',
-          top: -40,
-          right: -40,
-          width: 340,
-          height: 340,
-          opacity: 0.08,
+          top: -60,
+          right: -60,
+          width: 400,
+          height: 400,
+          opacity: 0.06,
           pointerEvents: 'none',
           userSelect: 'none',
         }}
@@ -141,23 +173,18 @@ export default function WhyMagnolia() {
 
       <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
         {/* Header */}
-        <div style={{ marginBottom: 'clamp(40px, 6vw, 72px)' }}>
-          <span
-            className="eyebrow"
-            style={{ color: 'var(--gold)' }}
-          >
-            Our Difference
-          </span>
+        <div style={{ marginBottom: 'clamp(8px, 2vw, 16px)' }}>
+          <span className="eyebrow" style={{ color: 'var(--gold)' }}>Our Difference</span>
           <h2
             style={{
               fontFamily: 'var(--font-display)',
               fontStyle: 'italic',
               fontWeight: 400,
-              fontSize: 'clamp(2.5rem, 5vw, 5rem)',
+              fontSize: 'clamp(2.8rem, 5.5vw, 5.5rem)',
               color: 'var(--text-dark)',
-              lineHeight: 0.95,
+              lineHeight: 0.9,
               letterSpacing: '-0.01em',
-              maxWidth: 600,
+              maxWidth: 640,
             }}
           >
             Why Sellers
@@ -166,24 +193,39 @@ export default function WhyMagnolia() {
           </h2>
         </div>
 
-        {/* Cards grid */}
+        {/* Grid of reasons */}
         <div
           className="why-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 20,
+            gap: 0,
+            marginTop: 'clamp(32px, 5vw, 56px)',
           }}
         >
           {reasons.map((reason, i) => (
-            <Card key={reason.title} reason={reason} index={i} />
+            <div
+              key={reason.number}
+              style={{
+                borderRight: i % 2 === 0 ? '1px solid rgba(26,26,26,0.1)' : 'none',
+              }}
+              className={i >= 2 ? 'reason-bottom' : ''}
+            >
+              <ReasonRow reason={reason} index={i} />
+            </div>
           ))}
         </div>
+
+        {/* Bottom border */}
+        <div style={{ borderTop: '1px solid rgba(26,26,26,0.15)', marginTop: 0 }} />
       </div>
 
       <style>{`
+        .reason-bottom { border-top: 1px solid rgba(26,26,26,0.15); }
         @media (max-width: 640px) {
           .why-grid { grid-template-columns: 1fr !important; }
+          .why-grid > div { border-right: none !important; }
+          .reason-bottom { border-top: none !important; }
         }
       `}</style>
     </section>
