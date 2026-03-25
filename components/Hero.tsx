@@ -27,21 +27,50 @@ export default function Hero() {
       style={{
         minHeight: '100vh',
         background: 'var(--bg-dark)',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
+        display: 'flex',
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
         paddingTop: 64,
       }}
-      className="hero-section"
     >
-      {/* Left: copy */}
+      {/* Full-bleed background image */}
+      {!imgError && (
+        <Image
+          src="/images/hero-neighborhood.jpg"
+          alt="Aerial neighborhood at sunset"
+          fill
+          priority
+          style={{ objectFit: 'cover', objectPosition: 'center 60%' }}
+          onError={() => setImgError(true)}
+        />
+      )}
+
+      {/* Dark overlay */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'rgba(0,0,0,0.52)',
+        }}
+      />
+
+      {/* Gradient: darken bottom for legibility */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.1) 50%, rgba(17,17,17,0.85) 100%)',
+        }}
+      />
+
+      {/* Copy */}
       <div
         style={{
           padding: 'clamp(48px, 8vw, 120px) clamp(24px, 5vw, 80px)',
           position: 'relative',
           zIndex: 2,
+          maxWidth: 780,
         }}
       >
         <motion.span
@@ -184,40 +213,8 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Right: image */}
-      {!imgError && (
-        <div
-          className="hero-image-panel"
-          style={{
-            position: 'relative',
-            height: '100%',
-            minHeight: '100vh',
-            overflow: 'hidden',
-          }}
-        >
-          <Image
-            src="/images/hero.jpg"
-            alt="Home exterior"
-            fill
-            priority
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
-            onError={() => setImgError(true)}
-          />
-          {/* Gradient overlay — left edge blends into dark bg */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to right, #111111 0%, rgba(17,17,17,0.3) 40%, rgba(17,17,17,0.1) 100%)',
-            }}
-          />
-        </div>
-      )}
-
       <style>{`
         @media (max-width: 768px) {
-          .hero-section { grid-template-columns: 1fr !important; }
-          .hero-image-panel { display: none !important; }
           .hero-stats { gap: 20px !important; }
         }
       `}</style>
