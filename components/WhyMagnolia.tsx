@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
@@ -54,25 +54,14 @@ const reasons = [
 ]
 
 function ReasonRow({ reason, index }: { reason: typeof reasons[0]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
   const [hovered, setHovered] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.15 }
-    )
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={visible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: (index % 2) * 0.12, ease: 'easeOut' }}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -36 : 36, y: 20 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.65, delay: Math.floor(index / 2) * 0.1, ease: 'easeOut' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -171,7 +160,13 @@ export default function WhyMagnolia() {
 
       <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
         {/* Header */}
-        <div style={{ marginBottom: 'clamp(8px, 2vw, 16px)' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.25, 0, 0, 1] as const }}
+          style={{ marginBottom: 'clamp(8px, 2vw, 16px)' }}
+        >
           <span className="eyebrow" style={{ color: 'var(--blue)' }}>Our Difference</span>
           <h2
             style={{
@@ -188,7 +183,7 @@ export default function WhyMagnolia() {
             <br />
             Choose <span style={{ color: 'var(--blue)' }}>Magnolia</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Grid of reasons */}
         <div

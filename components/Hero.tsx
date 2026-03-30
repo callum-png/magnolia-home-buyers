@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 const stats = [
   { num: '500+', label: 'Homes Purchased' },
@@ -21,9 +21,13 @@ const fadeUp = {
 
 export default function Hero() {
   const [imgError, setImgError] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] })
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, -120])
 
   return (
     <section
+      ref={sectionRef}
       style={{
         minHeight: '100vh',
         background: 'var(--bg-dark)',
@@ -31,19 +35,30 @@ export default function Hero() {
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
-        paddingTop: 64,
+        paddingTop: 76,
       }}
     >
-      {/* Full-bleed background image */}
+      {/* Full-bleed background image with parallax */}
       {!imgError && (
-        <Image
-          src="/images/hero-neighborhood.jpg"
-          alt="Drone aerial view of a sunny suburban neighborhood with houses and pools"
-          fill
-          priority
-          style={{ objectFit: 'cover', objectPosition: 'center 60%' }}
-          onError={() => setImgError(true)}
-        />
+        <motion.div
+          style={{
+            position: 'absolute',
+            top: -60,
+            bottom: -60,
+            left: 0,
+            right: 0,
+            y: bgY,
+          }}
+        >
+          <Image
+            src="/images/hero-neighborhood.jpg"
+            alt="Drone aerial view of a sunny suburban neighborhood with houses and pools"
+            fill
+            priority
+            style={{ objectFit: 'cover', objectPosition: 'center 60%' }}
+            onError={() => setImgError(true)}
+          />
+        </motion.div>
       )}
 
       {/* Dark overlay */}
@@ -114,7 +129,7 @@ export default function Hero() {
           style={{
             fontFamily: 'var(--font-body)',
             fontWeight: 300,
-            fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+            fontSize: 'clamp(1.1rem, 1.6vw, 1.35rem)',
             lineHeight: 1.7,
             color: 'var(--text-muted)',
             marginBottom: 36,

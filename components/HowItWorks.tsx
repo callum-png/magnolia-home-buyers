@@ -1,6 +1,5 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const steps = [
@@ -22,24 +21,12 @@ const steps = [
 ]
 
 function Step({ step, index }: { step: typeof steps[0]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.15 }
-    )
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={visible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.14, ease: 'easeOut' }}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40, y: 20 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.7, ease: [0.25, 0, 0, 1] as const }}
       style={{
         display: 'grid',
         gridTemplateColumns: '120px 1fr',
@@ -110,7 +97,11 @@ export default function HowItWorks() {
     >
       <div style={{ maxWidth: 1000, margin: '0 auto' }}>
         {/* Section header */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.25, 0, 0, 1] as const }}
           style={{
             display: 'flex',
             alignItems: 'flex-end',
@@ -160,7 +151,7 @@ export default function HowItWorks() {
           >
             Start Today
           </a>
-        </div>
+        </motion.div>
 
         {/* Steps */}
         <div style={{ marginTop: 'clamp(32px, 5vw, 56px)' }}>

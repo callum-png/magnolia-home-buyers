@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useState, useCallback } from 'react'
+// useRef kept for interval; visibility now handled by whileInView
 import { motion, AnimatePresence } from 'framer-motion'
 
 const testimonials = [
@@ -27,18 +28,7 @@ const testimonials = [
 export default function Testimonials() {
   const [current, setCurrent] = useState(0)
   const [direction, setDirection] = useState(1)
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.1 }
-    )
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
 
   const go = useCallback((index: number) => {
     setDirection(index > current ? 1 : -1)
@@ -98,12 +88,13 @@ export default function Testimonials() {
         &#8220;
       </div>
 
-      <div ref={ref} style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
+      <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative' }}>
         {/* Section label */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={visible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.25, 0, 0, 1] as const }}
           style={{ marginBottom: 'clamp(48px, 7vw, 80px)' }}
         >
           <span className="eyebrow">Real Stories</span>

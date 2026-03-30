@@ -110,7 +110,7 @@ body::after {
 /* ── Layer 6: Eyebrow Label Pattern ─────────────────────── */
 .eyebrow {
   font-family: var(--font-body);
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--blue);
   letter-spacing: 0.10em;

@@ -38,16 +38,21 @@ const faqs = [
   },
 ]
 
-function FAQItem({ faq, isOpen, onToggle, isLast }: {
+function FAQItem({ faq, isOpen, onToggle, isLast, index }: {
   faq: typeof faqs[0]
   isOpen: boolean
   onToggle: () => void
   isLast: boolean
+  index: number
 }) {
   const [hovered, setHovered] = useState(false)
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, x: -24, y: 8 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.55, delay: index * 0.05, ease: 'easeOut' }}
       style={{
         borderTop: '1px solid rgba(248,244,238,0.07)',
         borderBottom: isLast ? '1px solid rgba(248,244,238,0.07)' : 'none',
@@ -122,7 +127,7 @@ function FAQItem({ faq, isOpen, onToggle, isLast }: {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   )
 }
 
@@ -139,7 +144,13 @@ export default function FAQ() {
     >
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         {/* Header */}
-        <div style={{ marginBottom: 'clamp(40px, 6vw, 64px)' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7, ease: [0.25, 0, 0, 1] as const }}
+          style={{ marginBottom: 'clamp(40px, 6vw, 64px)' }}
+        >
           <span className="eyebrow" style={{ color: 'var(--blue)' }}>Questions</span>
           <h2
             style={{
@@ -153,13 +164,14 @@ export default function FAQ() {
           >
             Common Questions
           </h2>
-        </div>
+        </motion.div>
 
         {/* FAQ items */}
         {faqs.map((faq, i) => (
           <FAQItem
             key={faq.q}
             faq={faq}
+            index={i}
             isOpen={openIndex === i}
             onToggle={() => setOpenIndex(openIndex === i ? null : i)}
             isLast={i === faqs.length - 1}

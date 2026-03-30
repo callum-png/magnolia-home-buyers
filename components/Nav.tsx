@@ -19,7 +19,7 @@ export default function Nav() {
         left: 0,
         right: 0,
         zIndex: 100,
-        height: 64,
+        height: 76,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -35,7 +35,7 @@ export default function Nav() {
         style={{
           fontFamily: 'var(--font-display)',
           fontWeight: 700,
-          fontSize: '1.1rem',
+          fontSize: '1.25rem',
           color: 'var(--text-light)',
         }}
       >
@@ -50,7 +50,7 @@ export default function Nav() {
           alignItems: 'center',
           gap: 32,
           fontFamily: 'var(--font-body)',
-          fontSize: '0.82rem',
+          fontSize: '0.92rem',
           fontWeight: 500,
           color: 'var(--text-muted)',
         }}
@@ -75,7 +75,7 @@ export default function Nav() {
           style={{
             background: 'var(--blue)',
             color: '#fff',
-            padding: '8px 18px',
+            padding: '9px 22px',
             borderRadius: 2,
             fontWeight: 600,
             fontSize: '0.78rem',

@@ -1,3 +1,6 @@
+'use client'
+
+import { motion } from 'framer-motion'
 import LeadForm from './LeadForm'
 
 export default function CTASection() {
@@ -9,7 +12,11 @@ export default function CTASection() {
       }}
       id="contact"
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.75, ease: [0.25, 0, 0, 1] }}
         style={{
           maxWidth: 680,
           margin: '0 auto',
@@ -32,7 +39,7 @@ export default function CTASection() {
           Ready to{' '}
           <span style={{ color: 'var(--blue)' }}>Sell?</span>
         </h2>
-      </div>
+      </motion.div>
       <LeadForm />
     </section>
   )
