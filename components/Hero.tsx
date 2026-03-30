@@ -38,7 +38,7 @@ export default function Hero() {
       {!imgError && (
         <Image
           src="/images/hero-neighborhood.jpg"
-          alt="Aerial neighborhood at sunset"
+          alt="Drone aerial view of a sunny suburban neighborhood with houses and pools"
           fill
           priority
           style={{ objectFit: 'cover', objectPosition: 'center 60%' }}
